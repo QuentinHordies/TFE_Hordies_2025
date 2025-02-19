@@ -22,7 +22,7 @@ void setup() {
     while (1);
   }
   Serial.println(" BMP280 initié avec succès !");
-
+// j'aime le poulet
   //configuration du GPS
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
