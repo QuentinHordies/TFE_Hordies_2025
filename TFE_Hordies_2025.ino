@@ -1,18 +1,30 @@
+//***********************************************
+//TFE 6eme
+//Quentin Hordies
+//ESP32,MPU9250,BMP280,ADAFRUIT mini GPSpa 1010d , 
+//début:20/02/25
+//*******************NOTES***********************
+
+//*****************librairies********************
 #include <Adafruit_GPS.h>
 #include <Adafruit_BMP280.h>
 #include <Wire.h>
 #include <SPI.h>
 #include <LoRa.h> 
 
+//*****************CONSTANTE*********************
 #define ss 5 // pin chip select
 #define rst 14 // pin reset
 #define dio0 2
 
+//****************OBJETS*************************
 Adafruit_GPS GPS(&Wire);
 Adafruit_BMP280 bmp;
 
+//*****************VARIABLES*********************
 int counter = 0;
 
+//*****************SETUP*********************
 void setup() {
   Serial.begin(115200);  // initialisation du port série
   while (!Serial);
@@ -57,10 +69,17 @@ void setup() {
                   Adafruit_BMP280::FILTER_X16,       // Filtrage x16
                   Adafruit_BMP280::STANDBY_MS_500);  // Temps de repos de 500ms
 }
+//*****************FONCTIONS*****************
 
-void loop() {
-//AFFICHAGE SUR PORT SERIE
- // LECTURE DES DONNEES DU GPS
+
+
+
+
+
+void loop() { //*****************LOOP*********************
+//*****AFFICHAGE SUR PORT SERIE
+
+// LECTURE DES DONNEES DU GPS
   GPS.read();  
   if (GPS.newNMEAreceived()) { //si de nouvelles données sont reçu
     if (!GPS.parse(GPS.lastNMEA())) {  // analyse du NMEA reçue
