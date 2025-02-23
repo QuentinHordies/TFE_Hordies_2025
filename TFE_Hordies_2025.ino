@@ -44,7 +44,7 @@ void setup() {
     while (1);
   }
   Serial.println(" BMP280 initié avec succès !");
-// j'aime le poulet
+// j'aime le poulet3
   //configuration du GPS
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
@@ -59,7 +59,7 @@ void setup() {
 }
 
 void loop() {
-
+//AFFICHAGE SUR PORT SERIE
  // LECTURE DES DONNEES DU GPS
   GPS.read();  
   if (GPS.newNMEAreceived()) { //si de nouvelles données sont reçu
@@ -102,14 +102,46 @@ void loop() {
   Serial.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
   Serial.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
 
-  Serial.print("Sending packet: ");
-    Serial.println(counter);
+// ENVOIS PAR LoRa
+
+  LoRa.print("packet: ");
+    LoRa.println(counter);
 
   LoRa.beginPacket();
-  LoRa.print("hello ");
-  LoRa.print(counter);
+ // AFFICHAGE DES DONNEES DU GPS
+  LoRa.print("Satellites detected: ");
+  LoRa.println(GPS.satellites);  // affichage du nombre de sattelites
+
+  if (GPS.fix) {  // affichage des autres données GPS si elles sont disponibles
+
+    LoRa.println("GPS Data:");// affichage lattitude
+    LoRa.print("  Latitude: ");
+    LoRa.print(GPS.latitude, 4);
+    LoRa.print(GPS.lat);
+    LoRa.print("  Longitude: ");
+    LoRa.print(GPS.longitude, 4);
+    LoRa.println(GPS.lon);
+    LoRa.printf("Sattelites: %02d \n", GPS.satellites); // affichage des satellites
+    LoRa.printf("Altitude: %.2f meters \n", GPS.altitude);// affichage de l'altitude
+    LoRa.printf("Speed: %.2f knots \n", GPS.speed);// affichage de la vitesse
+    LoRa.printf("Course: %.2f degrees \n", GPS.angle);
+    LoRa.printf("Date: %02d / %02d / %02d \n", GPS.day, GPS.month, GPS.year);// affichage de la date
+    LoRa.printf("Time: %02d:%02d:%02d \n", GPS.hour, GPS.minute, GPS.seconds);//affichage de l'heure
+  }
+   else 
+  {
+   LoRa.println("Waiting for GPS fix...");// affiché si ne trouve pas de sattelite
+  }
+  // AFFICHAGE DES VALEURS DU BMP280
+  LoRa.printf(" Température : %.2f °C \n", temperature );// affichage température
+  LoRa.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
+  LoRa.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
+  LoRa.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
+
   LoRa.endPacket(true); // true = async / non-blocking mode
+
   counter++;
+
 
   delay(1000);  // Pause de 1 secondes entre chaque lecture
 }
