@@ -1,13 +1,35 @@
 #include <Adafruit_GPS.h>
 #include <Adafruit_BMP280.h>
 #include <Wire.h>
+#include <SPI.h>
+#include <LoRa.h> 
+
+#define ss 5 // pin chip select
+#define rst 14 // pin reset
+#define dio0 2
 
 Adafruit_GPS GPS(&Wire);
 Adafruit_BMP280 bmp;
 
+int counter = 0;
+
 void setup() {
   Serial.begin(115200);  // initialisation du port série
   while (!Serial);
+
+  Serial.println("LoRa Sender"); //setup émeteur LoRa 
+  LoRa.setPins(ss, rst, dio0);
+    if (!LoRa.begin(433E6)) 
+  {
+    Serial.println("Starting LoRa failed!");
+    while (1);
+  }
+  else
+  {
+    Serial.println("Starting LoRa succse!");
+  }
+ // LoRa.setSyncWord(0xF3);// code de synchronisation pour le receveur
+  Serial.println("LoRa Initializing OK!");
 
   Serial.println("Initialisation du GPS...");
   if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
@@ -79,6 +101,15 @@ void loop() {
   Serial.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
   Serial.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
   Serial.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
+
+  Serial.print("Sending packet: ");
+    Serial.println(counter);
+
+  LoRa.beginPacket();
+  LoRa.print("hello ");
+  LoRa.print(counter);
+  LoRa.endPacket(true); // true = async / non-blocking mode
+  counter++;
 
   delay(1000);  // Pause de 1 secondes entre chaque lecture
 }
