@@ -11,6 +11,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <LoRa.h> 
+#include <MPU9250.h>
 
 //*****************CONSTANTE*********************
 #define ss 5 // pin chip select
@@ -29,34 +30,44 @@ void setup() {
   Serial.begin(115200);  // initialisation du port série
   while (!Serial);
 
-  Serial.println("LoRa Sender"); //setup émeteur LoRa 
+  Serial.println("Emeteur LoRa"); //setup émeteur LoRa 
   LoRa.setPins(ss, rst, dio0);
     if (!LoRa.begin(433E6)) 
   {
-    Serial.println("Starting LoRa failed!");
+    Serial.println("échec démarage LoRa ");
     while (1);
   }
   else
   {
-    Serial.println("Starting LoRa succse!");
+    Serial.println("réussite démarage LoRa ");
   }
  // LoRa.setSyncWord(0xF3);// code de synchronisation pour le receveur
-  Serial.println("LoRa Initializing OK!");
+  Serial.println("initialisation LoRa OK");
 
-  Serial.println("Initialisation du GPS...");
+  Wire.begin();
+    delay(2000);
+
+  if (!mpu.setup(0x68)) {  // adresse a verifier
+      Serial.println("echec démarage MPU9250");
+      while (1) ;      
+        
+    }
+  Serial.println(" initialisation MPU9250 OK");
+
+  Serial.println("GPS");
   if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
-    Serial.println("Could not find GPS on I2C at address 0x10. Check connections!");
+    Serial.println("échec démarage GPS ");
     while (1);
   }
-  Serial.println(" GPS initié avec succès !");
+  Serial.println(" initialisation GPS OK");
 
-  Serial.println("Initialisation du capteur BMP280...");
+  Serial.println(" BMP280");
   if (!bmp.begin(0x77)) {// définition de l'adresse du BMP280
-    Serial.println(" Impossible de détecter le BMP280. Vérifiez les connexions !");
+    Serial.println(" échec démarage BMP280 ");
     while (1);
   }
-  Serial.println(" BMP280 initié avec succès !");
-// j'aime le poulet3
+  Serial.println(" initialisation BMP280 OK");
+
   //configuration du GPS
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
@@ -77,7 +88,10 @@ void setup() {
 
 
 void loop() { //*****************LOOP*********************
+
 //*****AFFICHAGE SUR PORT SERIE
+
+// LECTURE DES DONNEES DU MPU9250
 
 // LECTURE DES DONNEES DU GPS
   GPS.read();  
@@ -90,6 +104,14 @@ void loop() { //*****************LOOP*********************
   float temperature = bmp.readTemperature();
   float pression = bmp.readPressure() / 100.0F;  // Convertir en hPa
   float altitude = bmp.readAltitude(1013.25);    // 1013.25 hPa = pression moyenne au niveau de la mer
+
+ // AFFICHAGE DES DONNEES DU MPU9250
+    Serial.print("Yaw, Pitch, Roll: ");
+    Serial.print(mpu.getYaw(), 2);
+    Serial.print(", ");
+    Serial.print(mpu.getPitch(), 2);
+    Serial.print(", ");
+    Serial.println(mpu.getRoll(), 2);
 
  // AFFICHAGE DES DONNEES DU GPS
   Serial.print("Satellites detected: ");
