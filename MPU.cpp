@@ -15,15 +15,15 @@ int init_MPU(void) //********INITIALISATION
 
 int mesure_MPU(void)//**********MESURE
 {
+
+}
+
+int affichage_MPU(void)//**********AFFICHAGE
+{
     Serial.print("Yaw, Pitch, Roll: ");
     Serial.print(mpu.getYaw(), 2);
     Serial.print(", ");
     Serial.print(mpu.getPitch(), 2);
     Serial.print(", ");
     Serial.println(mpu.getRoll(), 2);
-}
-
-int affichage_MPU(void)//**********AFFICHAGE
-{
-
 }

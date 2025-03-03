@@ -8,54 +8,28 @@
 //*****************librairies********************
 #include <Wire.h>
 
-#include <SPI.h> // va avec lora
-#include <LoRa.h> 
-
 #include <MPU.h>
 #include <MINIGPS.h>
 #include <BMP280.h>
 
 //*****************CONSTANTE*********************
-#define ss 5 // pin chip select
-#define rst 14 // pin reset
-#define dio0 2
 
 //****************OBJETS*************************
 
-
-
 //*****************VARIABLES*********************
-int counter = 0;
 
 //*****************SETUP*********************
 void setup() {
   Serial.begin(115200);  // initialisation du port série
   while (!Serial);
 
-  Serial.println("Emeteur LoRa"); //setup émeteur LoRa 
-  LoRa.setPins(ss, rst, dio0);
-    if (!LoRa.begin(433E6)) 
-  {
-    Serial.println("échec démarage LoRa ");
-    while (1);
-  }
-  else
-  {
-    Serial.println("réussite démarage LoRa ");
-  }
- // LoRa.setSyncWord(0xF3);// code de synchronisation pour le receveur
-  Serial.println("initialisation LoRa OK");
-
+ init_LoRa();
  init_MPU();
  init_GPS();
  init_BMP();
 
 }
 //*****************FONCTIONS*****************
-
-
-
-
 
 
 void loop() { //*****************LOOP*********************
@@ -68,12 +42,15 @@ void loop() { //*****************LOOP*********************
 mesure_GPS();
  // LECTURE DES DONNEES DU BMP280
 mesure_BMP();
+// AFFICHAGE DES DONNEES DU MPU9250 serial
+affichage_MPU();
 
- // AFFICHAGE DES DONNEES DU MPU9250
-mesure_MPU();
-
- // AFFICHAGE DES DONNEES DU GPS
+// AFFICHAGE DES DONNEES DU GPS serial
  affichage_GPS();
+
+// AFFICHAGE DES DONNES BMP280 serial
+affichage_BMP();
+
 // ENVOIS PAR LoRa
 
   LoRa.print("packet: ");
@@ -113,7 +90,6 @@ mesure_MPU();
   LoRa.endPacket(true); // true = async / non-blocking mode
 
   counter++;
-
 
   delay(1000);  // Pause de 1 secondes entre chaque lecture
 }

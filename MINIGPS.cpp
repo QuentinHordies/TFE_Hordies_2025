@@ -53,10 +53,6 @@ int affichage_GPS(void)
   {
     Serial.println("Waiting for GPS fix...");// affiché si ne trouve pas de sattelite
   }
-  // AFFICHAGE DES VALEURS DU BMP280
-  Serial.printf(" Température : %.2f °C \n", temperature );// affichage température
-  Serial.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
-  Serial.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
-  Serial.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
+
 
 }
