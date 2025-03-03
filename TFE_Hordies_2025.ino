@@ -6,12 +6,14 @@
 //*******************NOTES***********************
 
 //*****************librairies********************
-#include <Adafruit_GPS.h>
-#include <Adafruit_BMP280.h>
 #include <Wire.h>
-#include <SPI.h>
+
+#include <SPI.h> // va avec lora
 #include <LoRa.h> 
-#include <MPU9250.h>
+
+#include <MPU.h>
+#include <MINIGPS.h>
+#include <BMP280.h>
 
 //*****************CONSTANTE*********************
 #define ss 5 // pin chip select
@@ -19,8 +21,8 @@
 #define dio0 2
 
 //****************OBJETS*************************
-Adafruit_GPS GPS(&Wire);
-Adafruit_BMP280 bmp;
+
+
 
 //*****************VARIABLES*********************
 int counter = 0;
@@ -44,41 +46,10 @@ void setup() {
  // LoRa.setSyncWord(0xF3);// code de synchronisation pour le receveur
   Serial.println("initialisation LoRa OK");
 
-  Wire.begin();
-    delay(2000);
+ init_MPU();
+ init_GPS();
+ init_BMP();
 
-  if (!mpu.setup(0x68)) {  // adresse a verifier
-      Serial.println("echec démarage MPU9250");
-      while (1) ;      
-        
-    }
-  Serial.println(" initialisation MPU9250 OK");
-
-  Serial.println("GPS");
-  if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
-    Serial.println("échec démarage GPS ");
-    while (1);
-  }
-  Serial.println(" initialisation GPS OK");
-
-  Serial.println(" BMP280");
-  if (!bmp.begin(0x77)) {// définition de l'adresse du BMP280
-    Serial.println(" échec démarage BMP280 ");
-    while (1);
-  }
-  Serial.println(" initialisation BMP280 OK");
-
-  //configuration du GPS
-  GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
-  GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
-  GPS.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
-
-  // Configuration du capteur BMP280
-  bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,      // Mode normal
-                  Adafruit_BMP280::SAMPLING_X2,      // Suréchantillonnage x2 pour la température
-                  Adafruit_BMP280::SAMPLING_X16,     // Suréchantillonnage x16 pour la pression
-                  Adafruit_BMP280::FILTER_X16,       // Filtrage x16
-                  Adafruit_BMP280::STANDBY_MS_500);  // Temps de repos de 500ms
 }
 //*****************FONCTIONS*****************
 
@@ -94,55 +65,15 @@ void loop() { //*****************LOOP*********************
 // LECTURE DES DONNEES DU MPU9250
 
 // LECTURE DES DONNEES DU GPS
-  GPS.read();  
-  if (GPS.newNMEAreceived()) { //si de nouvelles données sont reçu
-    if (!GPS.parse(GPS.lastNMEA())) {  // analyse du NMEA reçue
-      return;                          // erreur d'analyse
-    }
-  }
+mesure_GPS();
  // LECTURE DES DONNEES DU BMP280
-  float temperature = bmp.readTemperature();
-  float pression = bmp.readPressure() / 100.0F;  // Convertir en hPa
-  float altitude = bmp.readAltitude(1013.25);    // 1013.25 hPa = pression moyenne au niveau de la mer
+mesure_BMP();
 
  // AFFICHAGE DES DONNEES DU MPU9250
-    Serial.print("Yaw, Pitch, Roll: ");
-    Serial.print(mpu.getYaw(), 2);
-    Serial.print(", ");
-    Serial.print(mpu.getPitch(), 2);
-    Serial.print(", ");
-    Serial.println(mpu.getRoll(), 2);
+mesure_MPU();
 
  // AFFICHAGE DES DONNEES DU GPS
-  Serial.print("Satellites detected: ");
-  Serial.println(GPS.satellites);  // affichage du nombre de sattelites
-
-  if (GPS.fix) {  // affichage des autres données GPS si elles sont disponibles
-
-    Serial.println("GPS Data:");// affichage lattitude
-    Serial.print("  Latitude: ");
-    Serial.print(GPS.latitude, 4);
-    Serial.print(GPS.lat);
-    Serial.print("  Longitude: ");
-    Serial.print(GPS.longitude, 4);
-    Serial.println(GPS.lon);
-    Serial.printf("Sattelites: %02d \n", GPS.satellites); // affichage des satellites
-    Serial.printf("Altitude: %.2f meters \n", GPS.altitude);// affichage de l'altitude
-    Serial.printf("Speed: %.2f knots \n", GPS.speed);// affichage de la vitesse
-    Serial.printf("Course: %.2f degrees \n", GPS.angle);
-    Serial.printf("Date: %02d / %02d / %02d \n", GPS.day, GPS.month, GPS.year);// affichage de la date
-    Serial.printf("Time: %02d:%02d:%02d \n", GPS.hour, GPS.minute, GPS.seconds);//affichage de l'heure
-  }
-   else 
-  {
-    Serial.println("Waiting for GPS fix...");// affiché si ne trouve pas de sattelite
-  }
-  // AFFICHAGE DES VALEURS DU BMP280
-  Serial.printf(" Température : %.2f °C \n", temperature );// affichage température
-  Serial.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
-  Serial.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
-  Serial.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
-
+ affichage_GPS();
 // ENVOIS PAR LoRa
 
   LoRa.print("packet: ");
