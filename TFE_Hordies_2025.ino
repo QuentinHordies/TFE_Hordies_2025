@@ -11,6 +11,7 @@
 #include <MPU.h>
 #include <MINIGPS.h>
 #include <BMP280.h>
+#include <LoRa_tfe.h>
 
 //*****************CONSTANTE*********************
 
@@ -31,34 +32,28 @@ void setup() {
 }
 //*****************FONCTIONS*****************
 
-
 void loop() { //*****************LOOP*********************
 
 //*****AFFICHAGE SUR PORT SERIE
 
 // LECTURE DES DONNEES DU MPU9250
 
-// LECTURE DES DONNEES DU GPS
-mesure_GPS();
- // LECTURE DES DONNEES DU BMP280
-mesure_BMP();
-// AFFICHAGE DES DONNEES DU MPU9250 serial
-affichage_MPU();
+ mesure_GPS(); // LECTURE DES DONNEES DU GPS
 
-// AFFICHAGE DES DONNEES DU GPS serial
- affichage_GPS();
+ mesure_BMP(); // LECTURE DES DONNEES DU BMP280
 
-// AFFICHAGE DES DONNES BMP280 serial
-affichage_BMP();
+ affichage_MPU(); // AFFICHAGE DES DONNEES DU MPU9250 serial
 
-// ENVOIS PAR LoRa
+ affichage_GPS(); // AFFICHAGE DES DONNEES DU GPS serial
 
-  LoRa.print("packet: ");
+ affichage_BMP(); // AFFICHAGE DES DONNES BMP280 serial
+
+ LoRa.print("packet: "); // ENVOIS PAR LoRa
     LoRa.println(counter);
 
   LoRa.beginPacket();
- // AFFICHAGE DES DONNEES DU GPS
-  LoRa.print("Satellites detected: ");
+
+  LoRa.print("Satellites detected: "); // AFFICHAGE DES DONNEES DU GPS
   LoRa.println(GPS.satellites);  // affichage du nombre de sattelites
 
   if (GPS.fix) {  // affichage des autres données GPS si elles sont disponibles
