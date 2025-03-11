@@ -1,5 +1,5 @@
 #include <Adafruit_GPS.h>
-#include <MINIGPS.h>
+#include "MINIGPS.h"
 
 Adafruit_GPS GPS(&Wire);
 
@@ -32,7 +32,7 @@ int mesure_GPS(void)
 int affichage_GPS(void)
 {
  Serial.print("Satellites detected: ");
-  Serial.println(GPS.satellites);  // affichage du nombre de sattelites
+ Serial.println(GPS.satellites);  // affichage du nombre de sattelites
 
   if (GPS.fix) {  // affichage des autres données GPS si elles sont disponibles
 
@@ -54,6 +54,4 @@ int affichage_GPS(void)
   {
     Serial.println("Waiting for GPS fix...");// affiché si ne trouve pas de sattelite
   }
-
-
 }

@@ -1,9 +1,13 @@
 #include <Adafruit_BMP280.h>
-#include <BMP280.h>
+#include "BMP280.h"
 #include <SPI.h>
 #include <Wire.h>
 
 Adafruit_BMP280 bmp;
+
+  float temperature;
+  float pression;
+  float altitude;
 
 int init_BMP(void)
 {
