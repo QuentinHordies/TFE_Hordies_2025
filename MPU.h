@@ -1,4 +1,5 @@
+#define MPU.h
 
- init_MPU();
- mesure_MPU();
- affichage_MPU();
+int init_MPU(void);
+int mesure_MPU(void);
+int affichage_MPU(void);

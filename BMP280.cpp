@@ -1,4 +1,7 @@
 #include <Adafruit_BMP280.h>
+#include <BMP280.h>
+#include <SPI.h>
+#include <Wire.h>
 
 Adafruit_BMP280 bmp;
 
@@ -30,7 +33,6 @@ int mesure_BMP(void)
 
 int affichage_BMP(void)
 {
-  // AFFICHAGE DES VALEURS DU BMP280
   Serial.printf(" Température : %.2f °C \n", temperature );// affichage température
   Serial.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
   Serial.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude

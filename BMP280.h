@@ -1,4 +1,5 @@
+#define BMP280.h
 
- init_BMP();
- mesure_BMP();
- affichage_BMP();
+int init_BMP(void);
+int mesure_BMP(void);
+int affichage_BMP(void);

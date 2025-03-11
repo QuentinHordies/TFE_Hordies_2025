@@ -1,4 +1,5 @@
+#define MINIGPS.h
 
- init_GPS();
- mesure_GPS();
- affichage_GPS();
+int init_GPS(void);
+int mesure_GPS(void);
+int affichage_GPS(void);
