@@ -1,10 +1,7 @@
 
-#include <SPI.h> // va avec lora
-#include <LoRa.h> 
+
 #include "LoRa_tfe.h"
-#include "MPU.h"
-#include "MINIGPS.h"
-#include "BMP280.h"
+
 
 #define ss 5 // pin chip select
 #define rst 14 // pin reset

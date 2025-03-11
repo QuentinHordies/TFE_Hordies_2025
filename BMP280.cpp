@@ -1,7 +1,6 @@
-#include <Adafruit_BMP280.h>
+
 #include "BMP280.h"
-#include <SPI.h>
-#include <Wire.h>
+
 
 Adafruit_BMP280 bmp;
 

@@ -1,4 +1,4 @@
-#include <Adafruit_GPS.h>
+
 #include "MINIGPS.h"
 
 Adafruit_GPS GPS(&Wire);
