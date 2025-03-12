@@ -7,9 +7,9 @@
 #define rst 14 // pin reset
 #define dio0 2
 
-int counter = 0;
+//int counter = 0;
 
-int init_LoRa(void)
+void init_LoRa(void)
 {
   Serial.println("Emeteur LoRa"); //setup émeteur LoRa 
   LoRa.setPins(ss, rst, dio0);
@@ -27,7 +27,7 @@ int init_LoRa(void)
 
 }
 
-int affichage_LoRa_BMP280 (void)
+void affichage_LoRa_BMP280 (void)
 {
   LoRa.printf(" Température : %.2f °C \n", temperature );// affichage température
   LoRa.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
@@ -35,7 +35,7 @@ int affichage_LoRa_BMP280 (void)
   LoRa.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
 }
 
-int affichage_LoRa_GPS (void)
+void affichage_LoRa_GPS (void)
 {
 LoRa.print("Satellites detected: "); // AFFICHAGE DES DONNEES DU GPS
   LoRa.println(GPS.satellites);  // affichage du nombre de sattelites
@@ -63,19 +63,19 @@ LoRa.print("Satellites detected: "); // AFFICHAGE DES DONNEES DU GPS
 
 }
 
-int affichage_LoRa_packet (void)
+void affichage_LoRa_packet (int packet_number)
 {
   LoRa.print("packet: "); // ENVOIS PAR LoRa
-  LoRa.println(counter);
+  LoRa.println(packet_number);
   counter++;
 }
 
-int LoRa_beginPacket (void)
+void LoRa_beginPacket (void)
 {
   LoRa.beginPacket();
 }
 
-int LoRa_endPacket (void)
+void LoRa_endPacket (void)
 {
   LoRa.endPacket(true); // true = async / non-blocking mode
 }

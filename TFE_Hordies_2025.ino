@@ -6,10 +6,7 @@
 //*******************NOTES***********************
 
 //*****************librairies********************
-
 #include "TFE_Hordies_2025.h"
-
-
 //*****************CONSTANTE*********************
 
 //****************OBJETS*************************
@@ -20,35 +17,35 @@
 void setup() {
   Serial.begin(115200);  // initialisation du port série
   while (!Serial);
+  Wire.begin();
 
-/*
- init_LoRa();
- init_MPU();
+
  init_GPS();
- */
  init_BMP();
+ init_MPU();
+ init_LoRa();
 
 }
 //*****************FONCTIONS*****************
 
 void loop() { //*****************LOOP*********************
-/*
+
  mesure_GPS();
- */
- //mesure_BMP(); 
-/*
- affichage_MPU();
  affichage_GPS();
- */
- //*affichage_BMP();
-/*
+ mesure_BMP(); 
+ affichage_BMP();
+ //affichage_MPU();
+
+ 
+
+
 LoRa_beginPacket ();
 
-  affichage_LoRa_packet();
+  affichage_LoRa_packet(counter);
   affichage_LoRa_GPS();
   affichage_LoRa_BMP280();
 
 LoRa_endPacket ();
-*/
+
   delay(1000);  // Pause de 1 secondes entre chaque lecture
 }

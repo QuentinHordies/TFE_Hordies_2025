@@ -3,7 +3,7 @@
 
 Adafruit_GPS GPS(&Wire);
 
-int init_GPS(void)
+void init_GPS(void)
 {
   Serial.println("GPS");
   if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
@@ -19,17 +19,17 @@ int init_GPS(void)
 
 }
 
-int mesure_GPS(void)
+void mesure_GPS(void)
 {
   GPS.read();  
   if (GPS.newNMEAreceived()) { //si de nouvelles données sont reçu
     if (!GPS.parse(GPS.lastNMEA())) {  // analyse du NMEA reçue
-      return;                          // erreur d'analyse
+      Serial.println("erreur d'analyse");                          // erreur d'analyse
     }
   }
 }
 
-int affichage_GPS(void)
+void affichage_GPS(void)
 {
  Serial.print("Satellites detected: ");
  Serial.println(GPS.satellites);  // affichage du nombre de sattelites

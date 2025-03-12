@@ -3,9 +3,11 @@
 
 #include "TFE_Hordies_2025.h"
 
-int init_BMP(void);
-int mesure_BMP(void);
-int affichage_BMP(void);
+extern Adafruit_BMP280 bmp;
+
+void init_BMP(void);
+void mesure_BMP(void);
+void affichage_BMP(void);
 
   extern float temperature;
   extern float pression;
