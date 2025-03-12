@@ -7,7 +7,7 @@
 #define rst 14 // pin reset
 #define dio0 2
 
-//int counter = 0;
+
 
 void init_LoRa(void)
 {
@@ -63,11 +63,12 @@ LoRa.print("Satellites detected: "); // AFFICHAGE DES DONNEES DU GPS
 
 }
 
-void affichage_LoRa_packet (int packet_number)
+int affichage_LoRa_packet (int packet_number)
 {
   LoRa.print("packet: "); // ENVOIS PAR LoRa
   LoRa.println(packet_number);
-  counter++;
+  
+return counter++ ;
 }
 
 void LoRa_beginPacket (void)

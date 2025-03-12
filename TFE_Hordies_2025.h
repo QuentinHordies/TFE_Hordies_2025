@@ -1,6 +1,8 @@
 #ifndef TFE_Hordies_2025_H
  # define TFE_Hordies_2025_H
 
+extern int counter ;
+
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_BMP280.h>
@@ -13,6 +15,6 @@
 #include "BMP280.h"
 #include "LoRa_tfe.h"
 
-int counter = 0;
+void delay_second(int secondes);
 
  #endif

@@ -3,10 +3,12 @@
 
 #include "TFE_Hordies_2025.h"
 
+
+
 void init_LoRa(void);
 void affichage_LoRa_BMP280(void);
 void affichage_LoRa_GPS(void);
-void affichage_LoRa_packet(int packet_number);
+int affichage_LoRa_packet(int packet_number);
 
 void LoRa_beginPacket (void);
 void LoRa_endPacket (void);

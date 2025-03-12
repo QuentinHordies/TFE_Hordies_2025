@@ -3,19 +3,36 @@
 
 Adafruit_GPS GPS(&Wire);
 
-void init_GPS(void)
+int init_GPS(void)
 {
+  int state_GPS ;
+
   Serial.println("GPS");
   if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
-    Serial.println("échec démarage GPS ");
+    //Serial.println("échec démarage GPS ");
+    state_GPS =1;
     while (1);
   }
-  Serial.println(" initialisation GPS OK");
-
+  //Serial.println(" initialisation GPS OK");
+   state_GPS =0;
     //configuration du GPS
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
   GPS.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
+
+return state_GPS;
+}
+
+void etat_GPS(void)
+{
+ if (init_GPS() ==1)
+ {
+  Serial.println("échec démarage GPS ");
+ }
+ else 
+ {
+  Serial.println(" initialisation GPS OK");
+ }
 
 }
 

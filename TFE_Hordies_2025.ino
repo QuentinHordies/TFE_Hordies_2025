@@ -12,7 +12,7 @@
 //****************OBJETS*************************
 
 //*****************VARIABLES*********************
-
+int counter =0;
 //*****************SETUP*********************
 void setup() {
   Serial.begin(115200);  // initialisation du port série
@@ -21,6 +21,7 @@ void setup() {
 
 
  init_GPS();
+ etat_GPS();
  init_BMP();
  init_MPU();
  init_LoRa();
@@ -39,13 +40,13 @@ void loop() { //*****************LOOP*********************
  
 
 
-LoRa_beginPacket ();
+ LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
+ affichage_LoRa_packet(counter);
 
-  affichage_LoRa_packet(counter);
   affichage_LoRa_GPS();
   affichage_LoRa_BMP280();
 
 LoRa_endPacket ();
 
-  delay(1000);  // Pause de 1 secondes entre chaque lecture
+  delay_second(1);  // en secondes
 }
