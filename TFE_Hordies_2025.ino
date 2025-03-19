@@ -20,12 +20,12 @@ void setup() {
   Wire.begin();
 
 
- //init_GPS();
- etat_GPS();
- //init_BMP();
- etat_BMP();
- //init_MPU();
- etat_MPU();
+ init_GPS(adresse_GPS);
+ // etat_GPS();
+ init_BMP(adresse_BMP);
+ // etat_BMP();
+ init_MPU(adresse_MPU);
+ // etat_MPU();
  init_LoRa();
 
 }

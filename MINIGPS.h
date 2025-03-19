@@ -5,7 +5,7 @@
 
 extern Adafruit_GPS GPS;
 
-int init_GPS(void);
+int init_GPS(const byte adresse_GPS);
 void etat_GPS(void);
 void mesure_GPS(void);
 void affichage_GPS(void);

@@ -3,12 +3,12 @@
 
 Adafruit_GPS GPS(&Wire);
 
-int init_GPS(void)
+int init_GPS(const byte adresse_GPS)
 {
   int state_GPS ;
 
   Serial.println("GPS");
-  if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
+  if (!GPS.begin(adresse_GPS)) {// définition de l'adresse du GPS 0x10
     //Serial.println("échec démarage GPS ");
     state_GPS =1;
    // while (1);
@@ -21,11 +21,13 @@ int init_GPS(void)
   GPS.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
 
 return state_GPS;
+
+etat_GPS();
 }
 
 void etat_GPS(void)
 {
- if (init_GPS() ==1)
+ if (init_GPS( adresse_GPS ) ==1)
  {
   Serial.println("échec démarage GPS ");
  }

@@ -3,11 +3,11 @@
 
 MPU9250 mpu;
 
-int init_MPU(void) //********INITIALISATION
+int init_MPU(const byte adresse_MPU) //********INITIALISATION
 {
    int state_MPU;
 
-  if (!mpu.setup(0x68)) {  // adresse a verifier
+  if (!mpu.setup(adresse_MPU)) {  // adresse a verifier 0x68
       //Serial.println("echec démarage MPU9250");
       //while (1) ;      
         state_MPU =1;
@@ -15,11 +15,13 @@ int init_MPU(void) //********INITIALISATION
   Serial.println(" initialisation MPU9250 OK");
    state_MPU =0;
    return state_MPU;
+
+   etat_MPU();
 }
 
 void etat_MPU(void)
 {
- if (init_MPU() ==1)
+ if (init_MPU(adresse_MPU) ==1)
  {
   Serial.println("échec démarage MPU ");
  }

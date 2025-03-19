@@ -7,12 +7,12 @@ Adafruit_BMP280 bmp;
   float pression;
   float altitude;
   
-int init_BMP(void)
+int init_BMP( const byte adresse_BMP)
 {
   int state_BMP;
 
   Serial.println(" BMP280");
-  if (!bmp.begin(0x77)) {// définition de l'adresse du BMP280
+  if (!bmp.begin(adresse_BMP)) {// définition de l'adresse du BMP280 0x77
     //Serial.println(" échec démarage BMP280 ");
    // while (1);
    state_BMP =1;
@@ -27,11 +27,13 @@ int init_BMP(void)
                   Adafruit_BMP280::STANDBY_MS_500);  // Temps de repos de 500ms
 
   return state_BMP;
+
+  etat_BMP();
 }
 
 void etat_BMP(void)
 {
- if (init_BMP() ==1)
+ if (init_BMP( adresse_BMP) ==1)
  {
   Serial.println("échec démarage BMP ");
  }
