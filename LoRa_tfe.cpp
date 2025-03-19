@@ -79,4 +79,5 @@ void LoRa_beginPacket (void)
 void LoRa_endPacket (void)
 {
   LoRa.endPacket(true); // true = async / non-blocking mode
+  Serial.println("packet LoRa envoyer");
 }

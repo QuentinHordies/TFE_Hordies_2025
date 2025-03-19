@@ -5,8 +5,9 @@
   
 extern MPU9250 mpu;
 
-void init_MPU(void);
+int init_MPU(void);
+void etat_MPU(void);
 void affichage_MPU(void);
-//int mesure_MPU(void);
+int mesure_MPU(void);
 
 #endif

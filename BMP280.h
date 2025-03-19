@@ -5,7 +5,8 @@
 
 extern Adafruit_BMP280 bmp;
 
-void init_BMP(void);
+int init_BMP(void);
+void etat_BMP(void);
 void mesure_BMP(void);
 void affichage_BMP(void);
 

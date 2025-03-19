@@ -11,7 +11,7 @@ int init_GPS(void)
   if (!GPS.begin(0x10)) {// définition de l'adresse du GPS
     //Serial.println("échec démarage GPS ");
     state_GPS =1;
-    while (1);
+   // while (1);
   }
   //Serial.println(" initialisation GPS OK");
    state_GPS =0;

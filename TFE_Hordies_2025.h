@@ -3,6 +3,11 @@
 
 extern int counter ;
 
+// carte sd
+#include <SdFat.h>//2.3.0
+#include <ArduinoJson.h>  //7.3.0
+
+
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_BMP280.h>
@@ -14,7 +19,11 @@ extern int counter ;
 #include "MINIGPS.h"
 #include "BMP280.h"
 #include "LoRa_tfe.h"
+#include "CARTE_SD.h"
 
 void delay_second(int secondes);
+
+void affichage (void);
+void mesures (void);
 
  #endif

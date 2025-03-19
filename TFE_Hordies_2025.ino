@@ -1,6 +1,6 @@
 //***********************************************
 //TFE 6eme
-//Quentin Hordies
+//Quentin Hordies ඞ
 //ESP32,MPU9250,BMP280,ADAFRUIT mini GPSpa 1010d , 
 //début:20/02/25
 //*******************NOTES***********************
@@ -20,24 +20,21 @@ void setup() {
   Wire.begin();
 
 
- init_GPS();
+ //init_GPS();
  etat_GPS();
- init_BMP();
- init_MPU();
+ //init_BMP();
+ etat_BMP();
+ //init_MPU();
+ etat_MPU();
  init_LoRa();
 
 }
-//*****************FONCTIONS*****************
 
-void loop() { //*****************LOOP*********************
 
- mesure_GPS();
- affichage_GPS();
- mesure_BMP(); 
- affichage_BMP();
- //affichage_MPU();
+void loop() { 
 
- 
+ affichage ();
+ mesures ();
 
 
  LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
@@ -48,5 +45,5 @@ void loop() { //*****************LOOP*********************
 
 LoRa_endPacket ();
 
-  delay_second(1);  // en secondes
+ // delay_second(1);  // en secondes
 }

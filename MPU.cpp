@@ -3,29 +3,33 @@
 
 MPU9250 mpu;
 
-void init_MPU(void) //********INITIALISATION
+int init_MPU(void) //********INITIALISATION
 {
-   // delay(500);
+   int state_MPU;
 
   if (!mpu.setup(0x68)) {  // adresse a verifier
-      Serial.println("echec démarage MPU9250");
+      //Serial.println("echec démarage MPU9250");
       //while (1) ;      
-        
+        state_MPU =1;
     }
   Serial.println(" initialisation MPU9250 OK");
+   state_MPU =0;
+   return state_MPU;
 }
 
-void affichage_MPU(void)//**********AFFICHAGE
+void etat_MPU(void)
 {
-    Serial.print("Yaw, Pitch, Roll: ");
-    Serial.print(mpu.getYaw(), 2);
-    Serial.print(", ");
-    Serial.print(mpu.getPitch(), 2);
-    Serial.print(", ");
-    Serial.println(mpu.getRoll(), 2);
-   
+ if (init_MPU() ==1)
+ {
+  Serial.println("échec démarage MPU ");
+ }
+ else 
+ {
+  Serial.println(" initialisation MPU OK");
+ }
+
 }
-/*
+
 int mesure_MPU(void)//**********MESURE
 {
   if (mpu.update()) {
@@ -37,5 +41,17 @@ int mesure_MPU(void)//**********MESURE
     } 
     
 }
-*/
+
+
+void affichage_MPU(void)//**********AFFICHAGE
+{
+    Serial.print("Yaw, Pitch, Roll: ");
+    Serial.print(mpu.getYaw(), 2); //gauche droite
+    Serial.print(", ");
+    Serial.print(mpu.getPitch(), 2);// haut bas
+    Serial.print(", ");
+    Serial.println(mpu.getRoll(), 2);//tonneau
+   
+}
+
 
