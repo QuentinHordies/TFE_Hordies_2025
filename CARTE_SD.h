@@ -1,3 +1,4 @@
+/*
 #ifndef CARTE_SD_H     // Vérifie si  n'a pas encore été défini
   #define CARTE_SD_H
 
@@ -15,3 +16,5 @@ int checkSDCard(bool);
 
 
   #endif
+
+*/

@@ -5,7 +5,8 @@
 
 
 
-void init_LoRa(void);
+int init_LoRa(void);
+void etat_LoRa(void);
 void affichage_LoRa_BMP280(void);
 void affichage_LoRa_GPS(void);
 int affichage_LoRa_packet(int packet_number);

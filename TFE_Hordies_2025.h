@@ -19,15 +19,11 @@ extern int counter ;
 #include "MINIGPS.h"
 #include "BMP280.h"
 #include "LoRa_tfe.h"
-#include "CARTE_SD.h"
+//#include "CARTE_SD.h"
 
-const byte adresse_BMP = 0x77;
-const byte adresse_MPU = 0x68;
-const byte adresse_GPS = 0x10;
+
 
 void delay_second(int secondes);
 
-void affichage (void);
-void mesures (void);
 
  #endif

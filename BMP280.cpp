@@ -7,18 +7,19 @@ Adafruit_BMP280 bmp;
   float pression;
   float altitude;
   
-int init_BMP( const byte adresse_BMP)
+int init_BMP( char BMP_adr)
 {
   int state_BMP;
 
-  Serial.println(" BMP280");
-  if (!bmp.begin(adresse_BMP)) {// définition de l'adresse du BMP280 0x77
-    //Serial.println(" échec démarage BMP280 ");
-   // while (1);
-   state_BMP =1;
+  if (!bmp.begin(BMP_adr)) // définition de l'adresse du BMP280 0x77
+  {
+   state_BMP =1;// echec init
   }
-  //Serial.println(" initialisation BMP280 OK");
-   state_BMP =0;
+  else
+  {
+  state_BMP =0; // init reussie
+  }
+
   // Configuration du capteur BMP280
   bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,      // Mode normal
                   Adafruit_BMP280::SAMPLING_X2,      // Suréchantillonnage x2 pour la température
@@ -28,12 +29,11 @@ int init_BMP( const byte adresse_BMP)
 
   return state_BMP;
 
-  etat_BMP();
 }
 
-void etat_BMP(void)
+void etat_BMP(char BMP_adresse)
 {
- if (init_BMP( adresse_BMP) ==1)
+ if (init_BMP(BMP_adresse) ==1)
  {
   Serial.println("échec démarage BMP ");
  }

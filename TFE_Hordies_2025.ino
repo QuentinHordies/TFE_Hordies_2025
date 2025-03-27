@@ -20,22 +20,24 @@ void setup() {
   Wire.begin();
 
 
- init_GPS(adresse_GPS);
- // etat_GPS();
- init_BMP(adresse_BMP);
- // etat_BMP();
- init_MPU(adresse_MPU);
- // etat_MPU();
  init_LoRa();
 
+ etat_GPS(adresse_GPS);
+ etat_BMP(adresse_BMP);
+ etat_MPU(adresse_MPU);
+ 
 }
-
 
 void loop() { 
 
- affichage ();
- mesures ();
 
+ mesure_GPS();
+ mesure_BMP(); 
+ //mesure_MPU();
+
+ affichage_GPS();
+ affichage_BMP();
+ //affichage_MPU();
 
  LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
  affichage_LoRa_packet(counter);
@@ -44,6 +46,5 @@ void loop() {
   affichage_LoRa_BMP280();
 
 LoRa_endPacket ();
-
  // delay_second(1);  // en secondes
 }

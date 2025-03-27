@@ -9,23 +9,37 @@
 
 
 
-void init_LoRa(void)
+int init_LoRa(void)
 {
-  Serial.println("Emeteur LoRa"); //setup émeteur LoRa 
+  
   LoRa.setPins(ss, rst, dio0);
     if (!LoRa.begin(433E6)) 
   {
-    Serial.println("échec démarage LoRa ");
-    while (1);
+    return 1 ;
   }
   else
   {
-    Serial.println("réussite démarage LoRa ");
+    return 0 ;
+   
   }
  // LoRa.setSyncWord(0xF3);// code de synchronisation pour le receveur
-  Serial.println("initialisation LoRa OK");
+
 
 }
+
+void etat_LoRa (void)
+{
+ if (init_LoRa ()==1)
+ {
+  Serial.println("échec démarage LoRa ");
+ }
+ else 
+ {
+  Serial.println("initialisation LoRa OK");
+ }
+}
+
+
 
 void affichage_LoRa_BMP280 (void)
 {
