@@ -26,16 +26,17 @@ Tous ces capteurs seront interchangeables et n'auront pas de place définie ce q
 ## Mécanique :
 
 
-# Schéma de principe
+# Schéma de principe :
 
-## Avec bornier
+## Avec bornier :
 
-## Sans bornier
+## Sans bornier :
 
+# Etudes détaillées :
 
-# PCB
+# PCB :
 
-# Plans 3D
+# Plans 3D :
 
-# Datasheet
+# Datasheet :
 
