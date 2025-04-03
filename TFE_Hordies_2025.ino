@@ -31,11 +31,9 @@ void setup() {
 void loop() { 
 
 
- //mesure_GPS();
+ lecture_GPS();
  lecture_BMP(); 
  //mesure_MPU();
-
- //affichage_GPS();
 
  //affichage_MPU();
 

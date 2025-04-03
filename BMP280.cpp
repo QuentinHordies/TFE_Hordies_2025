@@ -69,5 +69,4 @@ void lecture_BMP(void)
   mesure_BMP();
   affichage_BMP();
  }
-
 }

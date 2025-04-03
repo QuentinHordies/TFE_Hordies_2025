@@ -11,5 +11,6 @@ int init_GPS(char GPS_adr);
 void etat_GPS(char GPS_adresse);
 void mesure_GPS(void);
 void affichage_GPS(void);
+void lecture_GPS(void) ;
 
 #endif

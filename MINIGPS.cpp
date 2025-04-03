@@ -3,17 +3,19 @@
 
 Adafruit_GPS GPS(&Wire);
 
+byte status_GPS =1 ;
+
 int init_GPS(char GPS_adr)
 {
-  int state_GPS ;
+  
 
   if (!GPS.begin(GPS_adr)) // définition de l'adresse du GPS 0x10 
   {
-   state_GPS =1;// echec init
+   status_GPS =1;// echec init
   }
   else
   {
-   state_GPS =0;
+   status_GPS =0;
   }
 
     //configuration du GPS
@@ -21,7 +23,7 @@ int init_GPS(char GPS_adr)
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
   GPS.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
 
-return state_GPS;
+return status_GPS;
 }
 
 void etat_GPS(char GPS_adresse)
@@ -71,4 +73,13 @@ void affichage_GPS(void)
   {
     Serial.println("Waiting for GPS fix...");// affiché si ne trouve pas de sattelite
   }
+}
+
+void lecture_GPS(void)
+{
+ if(status_GPS ==0)
+ {
+  mesure_GPS();
+  affichage_GPS();
+ }
 }
