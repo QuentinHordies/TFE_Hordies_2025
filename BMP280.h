@@ -10,7 +10,7 @@ int init_BMP( char BMP_adr );
 void etat_BMP(char BMP_adresse);
 void mesure_BMP(void);
 void affichage_BMP(void);
-void lecture_BMP(char BMP_adres);
+void lecture_BMP(void);
 
   extern float temperature;
   extern float pression;

@@ -6,18 +6,19 @@ Adafruit_BMP280 bmp;
   float temperature;
   float pression;
   float altitude;
+  byte status_BMP =1;
+
   
 int init_BMP( char BMP_adr)
 {
-  int state_BMP;
 
   if (!bmp.begin(BMP_adr)) // définition de l'adresse du BMP280 0x77
   {
-   state_BMP =1;// echec init
+   status_BMP =1;// echec init
   }
   else
   {
-  state_BMP =0; // init reussie
+  status_BMP =0; // init reussie
   }
 
   // Configuration du capteur BMP280
@@ -27,7 +28,7 @@ int init_BMP( char BMP_adr)
                   Adafruit_BMP280::FILTER_X16,       // Filtrage x16
                   Adafruit_BMP280::STANDBY_MS_500);  // Temps de repos de 500ms
 
-  return state_BMP;
+  return status_BMP;
 
 }
 
@@ -61,16 +62,12 @@ void affichage_BMP(void)
   Serial.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
 }
 
-void lecture_BMP(char BMP_adres)
+void lecture_BMP(void)
 {
- uint8_t status = bmp.getStatus();
- if(status ==0)
+ if(status_BMP ==0)
  {
   mesure_BMP();
   affichage_BMP();
  }
- else
- {
-  etat_BMP(BMP_adres);
- }
+
 }

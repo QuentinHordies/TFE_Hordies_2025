@@ -23,8 +23,8 @@ void setup() {
  init_LoRa();
 
  //etat_GPS(adresse_GPS);
- //etat_BMP(adresse_BMP);
- etat_MPU(adresse_MPU);
+ etat_BMP(adresse_BMP);
+ //etat_MPU(adresse_MPU);
  
 }
 
@@ -32,11 +32,11 @@ void loop() {
 
 
  //mesure_GPS();
- //mesure_BMP(); 
+ lecture_BMP(); 
  //mesure_MPU();
 
  //affichage_GPS();
- //affichage_BMP();
+
  //affichage_MPU();
 
  LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
