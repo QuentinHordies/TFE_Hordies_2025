@@ -33,6 +33,7 @@ int init_BMP( char BMP_adr)
 
 void etat_BMP(char BMP_adresse)
 {
+
  if (init_BMP(BMP_adresse) ==1)
  {
   Serial.println("échec démarage BMP ");
@@ -58,4 +59,18 @@ void affichage_BMP(void)
   Serial.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
   Serial.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
   Serial.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
+}
+
+void lecture_BMP(char BMP_adres)
+{
+ uint8_t status = bmp.getStatus();
+ if(status ==0)
+ {
+  mesure_BMP();
+  affichage_BMP();
+ }
+ else
+ {
+  etat_BMP(BMP_adres);
+ }
 }

@@ -3,6 +3,10 @@
 
 MPU9250 mpu;
 
+  float yaw;
+  float pitch;
+  float roll;
+
 int init_MPU(char MPU_adr) //********INITIALISATION
 {
   int state_MPU;
@@ -32,6 +36,13 @@ void etat_MPU(char MPU_adresse)
 
 int mesure_MPU(void)//**********MESURE
 {
+
+yaw= mpu.getYaw();
+pitch = mpu.getPitch();
+roll= mpu.getRoll();
+
+
+  /*
   if (mpu.update()) {
         static uint32_t prev_ms = millis();
         if (millis() > prev_ms + 25) {
@@ -39,19 +50,26 @@ int mesure_MPU(void)//**********MESURE
             prev_ms = millis();
         }
     } 
-    
+  */
 }
 
 
 void affichage_MPU(void)//**********AFFICHAGE
 {
+
+ Serial.printf(" Roulis : %.2f °C \n", yaw );// gauche droite
+ Serial.printf(" Tangage : %.2f °C \n", pitch );// haut bas
+ Serial.printf(" Lacet : %.2f °C \n", roll );// tonneau
+
+
+  /*
     Serial.print("Yaw, Pitch, Roll: ");
     Serial.print(mpu.getYaw(), 2); //gauche droite
     Serial.print(", ");
     Serial.print(mpu.getPitch(), 2);// haut bas
     Serial.print(", ");
     Serial.println(mpu.getRoll(), 2);//tonneau
-   
+   */
 }
 
 

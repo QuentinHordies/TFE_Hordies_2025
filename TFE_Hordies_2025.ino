@@ -22,8 +22,8 @@ void setup() {
 
  init_LoRa();
 
- etat_GPS(adresse_GPS);
- etat_BMP(adresse_BMP);
+ //etat_GPS(adresse_GPS);
+ //etat_BMP(adresse_BMP);
  etat_MPU(adresse_MPU);
  
 }
@@ -31,12 +31,12 @@ void setup() {
 void loop() { 
 
 
- mesure_GPS();
- mesure_BMP(); 
+ //mesure_GPS();
+ //mesure_BMP(); 
  //mesure_MPU();
 
- affichage_GPS();
- affichage_BMP();
+ //affichage_GPS();
+ //affichage_BMP();
  //affichage_MPU();
 
  LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
@@ -46,5 +46,5 @@ void loop() {
   affichage_LoRa_BMP280();
 
 LoRa_endPacket ();
- // delay_second(1);  // en secondes
+ delay_second(1);  // en secondes
 }
