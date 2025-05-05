@@ -14,11 +14,13 @@ extern int counter ;
 #include <MPU9250.h>
 #include <Adafruit_GPS.h>
 #include <LoRa.h> 
+#include <RPM.h>
 
 #include "MPU.h"
 #include "MINIGPS.h"
 #include "BMP280.h"
 #include "LoRa_tfe.h"
+#include "RPM.h"
 //#include "CARTE_SD.h"
 
 

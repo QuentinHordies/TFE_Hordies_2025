@@ -6,20 +6,19 @@ MPU9250 mpu;
   float yaw;
   float pitch;
   float roll;
+  byte status_MPU =1;
 
 int init_MPU(char MPU_adr) //********INITIALISATION
 {
-  int state_MPU;
-
   if (!mpu.setup( MPU_adr)) 
   {   
-   state_MPU =1;// echec init
+   status_MPU =1;// echec init
   }
   else
   { 
-   state_MPU =0;// réussite init
+   status_MPU =0;// réussite init
   }
-  return state_MPU;
+  return status_MPU;
 }
 
 void etat_MPU(char MPU_adresse)
@@ -72,4 +71,11 @@ void affichage_MPU(void)//**********AFFICHAGE
    */
 }
 
-
+void lecture_MPU(void)
+{
+ if(status_MPU ==0)
+ {
+  mesure_MPU();
+  affichage_MPU();
+ }
+}

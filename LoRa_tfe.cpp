@@ -21,7 +21,7 @@ int init_LoRa(void)
   {
     return 0 ;
   }
- // LoRa.setSyncWord(0xF3);// code de synchronisation pour le receveur
+
 
 
 }

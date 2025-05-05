@@ -9,5 +9,6 @@ int init_MPU(char MPU_adr);
 void etat_MPU(char MPU_adresse);
 void affichage_MPU(void);
 int mesure_MPU(void);
+void lecture_MPU(void);
 
 #endif
