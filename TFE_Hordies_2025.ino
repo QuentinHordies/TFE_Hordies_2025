@@ -19,8 +19,9 @@ void setup() {
   while (!Serial);
   Wire.begin();
 
-init_RPM();
+ init_RPM();
  init_LoRa();
+ init_ECRAN();
 
  etat_GPS(adresse_GPS);
  etat_BMP(adresse_BMP);
@@ -36,7 +37,7 @@ void loop() {
  lecture_MPU();
  lecture_RPM();
  
-Serial.println(rpm);
+affichage_ECRAN(rpm);
 
  LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
  affichage_LoRa_packet(counter);

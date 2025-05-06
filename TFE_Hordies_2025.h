@@ -2,6 +2,7 @@
  # define TFE_Hordies_2025_H
 
 extern int counter ;
+extern unsigned int rpm;
 
 // carte sd
 #include <SdFat.h>//2.3.0
@@ -15,15 +16,16 @@ extern int counter ;
 #include <Adafruit_GPS.h>
 #include <LoRa.h> 
 #include <RPM.h>
+#include <Arduino.h>//ecran
+
 
 #include "MPU.h"
 #include "MINIGPS.h"
 #include "BMP280.h"
 #include "LoRa_tfe.h"
 #include "RPM.h"
+#include "ECRAN.h"
 //#include "CARTE_SD.h"
-
-
 
 void delay_second(int secondes);
 
