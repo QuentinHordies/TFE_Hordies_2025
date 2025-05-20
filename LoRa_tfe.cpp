@@ -38,14 +38,25 @@ void etat_LoRa (void)
  }
 }
 
+void affichage_LoRa_RPM (void)
+{
+  LoRa.print("Rpm : "); 
+  LoRa.print(rpm);
+  LoRa.println(" Tour/min ");// affichage vitesse 
+}
 
+void affichage_LoRa_VITESSE (void)
+{
+  LoRa.print("Vitesse : "); 
+  LoRa.println(vitesse_kmh);
+  LoRa.printf(" Km/h ");// affichage vitesse
+}
 
 void affichage_LoRa_BMP280 (void)
 {
   LoRa.printf(" Température : %.2f °C \n", temperature );// affichage température
   LoRa.printf(" Pression : %.2f hPa \n", pression);// affichage de la pression atmosphérique
   LoRa.printf(" Altitude estimée : %.2f m \n", altitude);// affichage de l'altitude
-  LoRa.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
 }
 
 void affichage_LoRa_GPS (void)
@@ -92,5 +103,6 @@ void LoRa_beginPacket (void)
 void LoRa_endPacket (void)
 {
   LoRa.endPacket(true); // true = async / non-blocking mode
+  LoRa.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
   Serial.println("packet LoRa envoyer");
 }

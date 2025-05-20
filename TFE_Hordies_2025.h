@@ -3,6 +3,7 @@
 
 extern int counter ;
 extern unsigned int rpm;
+extern float vitesse_kmh;
 
 // carte sd
 #include <SdFat.h>//2.3.0
@@ -25,6 +26,7 @@ extern unsigned int rpm;
 #include "LoRa_tfe.h"
 #include "RPM.h"
 #include "ECRAN.h"
+#include "VITESSE.h"
 //#include "CARTE_SD.h"
 
 void delay_second(int secondes);

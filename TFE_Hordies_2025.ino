@@ -22,6 +22,7 @@ void setup() {
  init_RPM();
  init_LoRa();
  init_ECRAN();
+ init_VITESSE();
 
  etat_GPS(adresse_GPS);
  etat_BMP(adresse_BMP);
@@ -36,12 +37,16 @@ void loop() {
  lecture_BMP(); 
  lecture_MPU();
  lecture_RPM();
+ //lecture_VITESSE();
  
-affichage_ECRAN(rpm);
+affichage_ECRAN_RPM(rpm);
+affichage_ECRAN_VITESSE(vitesse_kmh);
 
  LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
  affichage_LoRa_packet(counter);
 
+  affichage_LoRa_RPM ();
+  affichage_LoRa_VITESSE ();
   affichage_LoRa_GPS();
   affichage_LoRa_BMP280();
 

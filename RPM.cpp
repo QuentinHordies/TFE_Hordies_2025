@@ -1,10 +1,10 @@
 #include "RPM.h"
 
+unsigned int rpm = 0;
+
 const int hallPin = 32;                 // Capteur Hall branché ici
 volatile unsigned long pulseCount = 0;  // Compteur d’impulsions
-
 unsigned long lastMeasure = 0;
-unsigned int rpm = 0;
 
 void IRAM_ATTR countPulse() {
   pulseCount++;  // Incrémente à chaque impulsion (interruption)
@@ -32,3 +32,5 @@ void lecture_RPM() {
   }
 
 }
+
+
