@@ -7,8 +7,6 @@ byte status_GPS =1 ;
 
 int init_GPS(char GPS_adr)
 {
-  
-
   if (!GPS.begin(GPS_adr)) // définition de l'adresse du GPS 0x10 
   {
    status_GPS =1;// echec init
@@ -18,7 +16,7 @@ int init_GPS(char GPS_adr)
    status_GPS =0;
   }
 
-    //configuration du GPS
+    //configuration du GPS Reprise de l'exemple de la librairie
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);  // fréquence de mise a jour du GPS 1Hz
   GPS.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
@@ -43,7 +41,7 @@ void mesure_GPS(void)
   GPS.read();  
   if (GPS.newNMEAreceived()) { //si de nouvelles données sont reçu
     if (!GPS.parse(GPS.lastNMEA())) {  // analyse du NMEA reçue
-      Serial.println("erreur d'analyse");                          // erreur d'analyse
+      Serial.println("erreur d'analyse"); // erreur d'analyse
     }
   }
 }
@@ -55,11 +53,11 @@ void affichage_GPS(void)
 
   if (GPS.fix) {  // affichage des autres données GPS si elles sont disponibles
 
-    Serial.println("GPS Data:");// affichage lattitude
-    Serial.print("  Latitude: ");
+    Serial.println("GPS Data:");
+    Serial.print("  Latitude: ");// affichage lattitude
     Serial.print(GPS.latitude, 4);
     Serial.print(GPS.lat);
-    Serial.print("  Longitude: ");
+    Serial.print("  Longitude: ");// affichage longitude
     Serial.print(GPS.longitude, 4);
     Serial.println(GPS.lon);
     Serial.printf("Sattelites: %02d \n", GPS.satellites); // affichage des satellites

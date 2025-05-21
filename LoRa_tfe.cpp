@@ -103,6 +103,6 @@ void LoRa_beginPacket (void)
 void LoRa_endPacket (void)
 {
   LoRa.endPacket(true); // true = async / non-blocking mode
-  LoRa.println("----------------------");//segmentation des infos ,inutile juste pour mieux visualiser
+  LoRa.println("----------------------"); //segmentation des infos ,inutile juste pour mieux visualiser
   Serial.println("packet LoRa envoyer");
 }

@@ -21,7 +21,7 @@ int init_BMP( char BMP_adr)
   status_BMP =0; // init reussie
   }
 
-  // Configuration du capteur BMP280
+  // Configuration du capteur BMP280 Reprise de l'exemple test de la librairie
   bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,      // Mode normal
                   Adafruit_BMP280::SAMPLING_X2,      // Suréchantillonnage x2 pour la température
                   Adafruit_BMP280::SAMPLING_X16,     // Suréchantillonnage x16 pour la pression

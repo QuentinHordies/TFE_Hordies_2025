@@ -1,4 +1,4 @@
-#include "VITESSE.h"
+#include "VITESSE.h" // avec l'aide de ChatGPT
 
  float vitesse_kmh =0;
 

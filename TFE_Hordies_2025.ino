@@ -1,7 +1,7 @@
 //***********************************************
 //TFE 6eme
 //Quentin Hordies ඞ
-//ESP32,MPU9250,BMP280,ADAFRUIT mini GPSpa 1010d , 
+//ESP32,MPU9250,BMP280,ADAFRUIT mini GPSpa 1010d , capteur a effet hall ,capteur inductif, lecteur de carte SD MSD-7-A
 //début:20/02/25
 //*******************NOTES***********************
 
@@ -42,7 +42,7 @@ void loop() {
 affichage_ECRAN_RPM(rpm);
 affichage_ECRAN_VITESSE(vitesse_kmh);
 
- LoRa_beginPacket ();//essayer de fusioner avec affichage_lora_packet
+ LoRa_beginPacket ();//création du paquet pour l'envoie par LoRa
  affichage_LoRa_packet(counter);
 
   affichage_LoRa_RPM ();
@@ -51,5 +51,5 @@ affichage_ECRAN_VITESSE(vitesse_kmh);
   affichage_LoRa_BMP280();
 
 LoRa_endPacket ();
- delay_second(1);  // en secondes
+ delay_second(1);  // en secondes !!!! A SUPPRIMER ? POUR LES TESTS
 }

@@ -3,9 +3,9 @@
 
 MPU9250 mpu;
 
-  float yaw;
-  float pitch;
-  float roll;
+  float yaw; //gauche droite
+  float pitch; // haut bas
+  float roll; //tonneau
   byte status_MPU =1;
 
 int init_MPU(char MPU_adr) //********INITIALISATION
