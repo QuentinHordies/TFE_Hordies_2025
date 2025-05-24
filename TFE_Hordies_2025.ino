@@ -37,7 +37,7 @@ void loop() {
  lecture_BMP(); 
  lecture_MPU();
  lecture_RPM();
- //lecture_VITESSE();
+
  
 affichage_ECRAN_RPM(rpm);
 affichage_ECRAN_VITESSE(vitesse_kmh);
@@ -51,5 +51,5 @@ affichage_ECRAN_VITESSE(vitesse_kmh);
   affichage_LoRa_BMP280();
 
 LoRa_endPacket ();
- delay_second(1);  // en secondes !!!! A SUPPRIMER ? POUR LES TESTS
+// delay_second(1);  // en secondes !!!! A SUPPRIMER , POUR LES TESTS
 }
