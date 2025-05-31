@@ -10,13 +10,13 @@ extern float vitesse_kmh;
 #include <ArduinoJson.h>  //7.3.0
 
 
-#include <Wire.h>
-#include <SPI.h>
-#include <Adafruit_BMP280.h>
-#include <MPU9250.h>
-#include <Adafruit_GPS.h>
-#include <LoRa.h> 
-#include <RPM.h>
+#include <Wire.h> //
+#include <SPI.h> //
+#include <Adafruit_BMP280.h> // Adafruit BMP280 Library by Adafruit 2.6.8
+#include <MPU9250.h> // MPU9250 by hideakitai 0.4.8
+#include <Adafruit_GPS.h> // Adafruit GPS Library by Adafruit 1.7.5
+#include <LoRa.h>  // LoRa by Sandeep Mistry 0.8.0
+// #include <RPM.h> //
 #include <Arduino.h>//ecran
 
 
